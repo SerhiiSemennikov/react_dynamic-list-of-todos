@@ -1,5 +1,5 @@
 export enum Field {
-  All = 'ALL',
-  Active = 'ACTIVE',
-  Completed = 'COMPLETED',
+  All = 'all',
+  Active = 'active',
+  Completed = 'completed',
 }
