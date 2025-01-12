@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 type Props = {
   query: string;
-  onChangeStatus: (newStatus: string) => void;
+  onChangeStatus: (newStatus: React.SetStateAction<string>) => void;
   onChangeQuery: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onReset: () => void;
 };

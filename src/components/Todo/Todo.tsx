@@ -1,4 +1,3 @@
-//import classNames from 'classnames';
 import { Todo } from '../../types/Todo';
 import React from 'react';
 
@@ -16,7 +15,7 @@ export const TodoItem: React.FC<Props> = ({
   const isSelectedTodo = todo.id === selectedTodo?.id;
 
   return (
-    <tr data-cy="todo" className="">
+    <tr data-cy="todo">
       <td className="is-vcentered">{todo?.id}</td>
       <td className="is-vcentered">
         {todo.completed && (

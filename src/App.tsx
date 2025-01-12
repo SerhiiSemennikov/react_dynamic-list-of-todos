@@ -38,12 +38,14 @@ export const App: React.FC = () => {
 
     return filteredByField && filteredByQuery;
   });
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     setIsLoading(true);
 
     getTodos()
       .then(setTodos)
+      .catch(error => setErrorMessage(error.message))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -56,7 +58,7 @@ export const App: React.FC = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const handleChangeStatus = (newStatus: string) => {
+  const handleChangeStatus = (newStatus: React.SetStateAction<string>) => {
     setFilteredField(newStatus);
   };
 
@@ -94,6 +96,9 @@ export const App: React.FC = () => {
                 showSelectedTodo={handleTodo}
                 selectedTodo={selectedTodo}
               />
+              {errorMessage && (
+                <p className="message is-danger">{errorMessage}</p>
+              )}
             </div>
           </div>
         </div>

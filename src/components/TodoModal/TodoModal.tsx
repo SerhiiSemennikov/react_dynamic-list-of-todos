@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { Todo } from '../../types/Todo';
 import { User } from '../../types/User';
-//import classNames from 'classnames';
 import { getUser } from '../../api';
 
 type Props = {
@@ -19,15 +18,17 @@ export const TodoModal: React.FC<Props> = ({
   setUser,
 }) => {
   const [isTodoLoading, setIsTodoLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     setIsTodoLoading(true);
     if (todo) {
       getUser(todo.userId)
         .then(setUser)
+        .catch(error => setErrorMessage(error.message))
         .finally(() => setIsTodoLoading(false));
     }
-  }, [todo, setUser, todo?.userId]);
+  }, [todo, setUser]);
 
   return (
     <div className="modal is-active" data-cy="modal">
@@ -73,6 +74,7 @@ export const TodoModal: React.FC<Props> = ({
           </div>
         </div>
       )}
+      {errorMessage && <p className="message is-danger">{errorMessage}</p>}
     </div>
   );
 };
